@@ -56,6 +56,10 @@ def create_gui(username):
     text_area = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=20)
     text_area.pack(padx=5, pady=5)
 
+    # Add a label for "YourUsername"
+    username_label = tk.Label(frame, text="YourUsername")
+    username_label.pack(side=tk.LEFT, padx=(5, 0), pady=5)
+
     message_entry = tk.Entry(frame, width=40)
     message_entry.pack(side=tk.LEFT, padx=5, pady=5)
 
