@@ -57,7 +57,7 @@ def create_gui(username):
     text_area.pack(padx=5, pady=5)
 
     # Add a label for "YourUsername"
-    username_label = tk.Label(frame, text="YourUsername")
+    username_label = tk.Label(frame, text=username)
     username_label.pack(side=tk.LEFT, padx=(5, 0), pady=5)
 
     message_entry = tk.Entry(frame, width=40)
