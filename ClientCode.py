@@ -8,18 +8,21 @@ import argparse
 running = True
 
 # Function to handle receiving messages from the server
-def receive_messages(client_socket, text_area):
+def receive_messages(client_socket, text_area, clients_display):
     global running
     while running:
         try:
             message = client_socket.recv(1024).decode('utf-8')
-            if message:
+            if message.startswith("Connected clients:"):
+                clients_display.config(state=tk.NORMAL)
+                clients_display.delete(1.0, tk.END)
+                clients_display.insert(tk.END, f"{message}\n")
+                clients_display.config(state=tk.DISABLED)
+            else:
                 text_area.config(state=tk.NORMAL)
                 text_area.insert(tk.END, f"{message}\n")
                 text_area.config(state=tk.DISABLED)
                 text_area.see(tk.END)
-            else:
-                break
         except:
             break
     client_socket.close()
@@ -33,11 +36,11 @@ def send_message(client_socket, message_entry, username):
         message_entry.delete(0, tk.END)
 
 # Function to start the client and connect to the server
-def start_client(host, port, text_area, message_entry, username):
+def start_client(host, port, text_area, message_entry, clients_display, username):
     try:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((host, port))
-        threading.Thread(target=receive_messages, args=(client_socket, text_area)).start()
+        threading.Thread(target=receive_messages, args=(client_socket, text_area, clients_display)).start()
         return client_socket
     except Exception as e:
         messagebox.showerror("Connection Error", str(e))
@@ -57,8 +60,11 @@ def create_gui(username):
     frame = tk.Frame(window)
     frame.pack(padx=10, pady=10)
 
-    text_area = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=20)
+    text_area = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=15)
     text_area.pack(padx=5, pady=5)
+
+    clients_display = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=5)
+    clients_display.pack(padx=5, pady=5)
 
     username_label = tk.Label(frame, text=username)
     username_label.pack(side=tk.LEFT, padx=(5, 0), pady=5)
@@ -77,7 +83,7 @@ def create_gui(username):
     host = '127.0.0.1'  # Server IP address
     port = 9999         # Server port
 
-    client_socket = start_client(host, port, text_area, message_entry, username)
+    client_socket = start_client(host, port, text_area, message_entry, clients_display, username)
 
     def on_closing():
         global running
