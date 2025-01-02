@@ -1,5 +1,6 @@
 import socket
 import threading
+from datetime import datetime
 
 clients = []
 
@@ -9,8 +10,10 @@ def handle_client(client_socket):
         try:
             message = client_socket.recv(1024).decode('utf-8')
             if message:
-                print(f"Client: {message}")
-                broadcast_message(message, client_socket)
+                timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                message_with_timestamp = f"[{timestamp}] {message}"
+                print(f"Client: {message_with_timestamp}")
+                broadcast_message(message_with_timestamp, client_socket)
             else:
                 break
         except:
