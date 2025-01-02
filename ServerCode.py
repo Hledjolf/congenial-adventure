@@ -21,15 +21,14 @@ def handle_client(client_socket):
     client_socket.close()
     clients.remove(client_socket)
 
-# Function to broadcast messages to all clients
+# Function to broadcast messages to all clients, including the sender
 def broadcast_message(message, sender_socket):
     for client in clients:
-        if client != sender_socket:
-            try:
-                client.send(message.encode('utf-8'))
-            except:
-                client.close()
-                clients.remove(client)
+        try:
+            client.send(message.encode('utf-8'))
+        except:
+            client.close()
+            clients.remove(client)
 
 # Create a socket for the server
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
