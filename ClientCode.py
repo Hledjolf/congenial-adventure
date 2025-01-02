@@ -66,6 +66,9 @@ def create_gui(username):
     send_button = tk.Button(frame, text="Send", command=lambda: send_message(client_socket, message_entry, username))
     send_button.pack(side=tk.LEFT, padx=5, pady=5)
 
+    close_button = tk.Button(frame, text="Close", command=window.quit)
+    close_button.pack(side=tk.LEFT, padx=5, pady=5)
+
     message_entry.bind("<Return>", lambda event: send_message(client_socket, message_entry, username))
 
     host = '127.0.0.1'  # Server IP address
