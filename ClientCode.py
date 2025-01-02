@@ -4,9 +4,13 @@ import tkinter as tk
 from tkinter import scrolledtext, messagebox
 import argparse
 
+# Global variable to control the receive_messages loop
+running = True
+
 # Function to handle receiving messages from the server
 def receive_messages(client_socket, text_area):
-    while True:
+    global running
+    while running:
         try:
             message = client_socket.recv(1024).decode('utf-8')
             if message:
@@ -56,7 +60,6 @@ def create_gui(username):
     text_area = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=20)
     text_area.pack(padx=5, pady=5)
 
-    # Add a label for "YourUsername"
     username_label = tk.Label(frame, text=username)
     username_label.pack(side=tk.LEFT, padx=(5, 0), pady=5)
 
@@ -76,7 +79,14 @@ def create_gui(username):
 
     client_socket = start_client(host, port, text_area, message_entry, username)
 
-    window.protocol("WM_DELETE_WINDOW", lambda: window.quit() if client_socket else None)
+    def on_closing():
+        global running
+        running = False
+        if client_socket:
+            client_socket.close()
+        window.quit()
+
+    window.protocol("WM_DELETE_WINDOW", on_closing)
     window.mainloop()
 
 # Run the GUI application
