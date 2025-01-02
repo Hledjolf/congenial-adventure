@@ -41,7 +41,7 @@ def start_client(host, port, text_area, message_entry, username):
 
 # Function to parse command-line arguments
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="P2P Chat Client")
+    parser = argparse.ArgumentParser(description="Chat Client")
     parser.add_argument('--name', type=str, required=True, help='Username for the chat client')
     return parser.parse_args()
 
