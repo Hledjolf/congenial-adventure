@@ -48,7 +48,7 @@ def parse_arguments():
 # Create the main application window
 def create_gui(username):
     window = tk.Tk()
-    window.title("P2P Chat Client")
+    window.title("Chat Client")
 
     frame = tk.Frame(window)
     frame.pack(padx=10, pady=10)
