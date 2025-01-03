@@ -58,25 +58,27 @@ def create_gui(username):
     window.title("Chat Client")
 
     frame = tk.Frame(window)
-    frame.pack(padx=10, pady=10)
+    frame.grid(padx=10, pady=10)
 
     text_area = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=15)
-    text_area.pack(padx=5, pady=5)
+    text_area.grid(row=0, column=0, columnspan=10, padx=5, pady=5)
 
-    clients_display = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=5)
-    clients_display.pack(padx=5, pady=5)
+    clients_display = scrolledtext.ScrolledText(frame, wrap=tk.WORD, state=tk.DISABLED, width=20, height=15)
+    clients_display.grid(row=0, column=10, padx=5, pady=5, sticky='n')
 
     username_label = tk.Label(frame, text=username)
-    username_label.pack(side=tk.LEFT, padx=(5, 0), pady=5)
+    username_label.grid(row=2, column=0, padx=(5, 0), pady=5)
 
     message_entry = tk.Entry(frame, width=40)
-    message_entry.pack(side=tk.LEFT, padx=5, pady=5)
+    message_entry.grid(row=2, column=1, padx=5, pady=5, columnspan=4)
 
     send_button = tk.Button(frame, text="Send", command=lambda: send_message(client_socket, message_entry, username))
-    send_button.pack(side=tk.LEFT, padx=5, pady=5)
+    send_button.grid(row=2, column=5, padx=5, pady=5)
 
-    close_button = tk.Button(frame, text="Close", command=window.quit)
-    close_button.pack(side=tk.LEFT, padx=5, pady=5)
+    # Add 10 Use_Skill buttons using grid
+    for i in range(10):
+        use_skill_button = tk.Button(frame, text=f"Use_Skill {i+1}", command=lambda i=i: send_message(client_socket, message_entry, f"use_skill_{i+1}"))
+        use_skill_button.grid(row=3 + i // 5, column=i % 5, padx=5, pady=5)
 
     message_entry.bind("<Return>", lambda event: send_message(client_socket, message_entry, username))
 
