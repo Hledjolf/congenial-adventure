@@ -14,15 +14,16 @@ def receive_messages(client_socket, text_area, users_listbox, mobs_listbox):
     while running:
         try:
             message = client_socket.recv(1024).decode('utf-8')
-            if message.startswith("Connected clients:"):
+            if message.startswith("Connected users:"):
                 users_listbox.delete(0, END)
+                users = message.split('\n')[1:]
+                for user in users:
+                    users_listbox.insert(END, user)
+            elif message.startswith("Connected mobs:"):
                 mobs_listbox.delete(0, END)
-                clients = message.split('\n')[1:]
-                for client in clients:
-                    if "is_user=1" in client:
-                        users_listbox.insert(END, client)
-                    elif "is_user=0" in client:
-                        mobs_listbox.insert(END, client)
+                mobs = message.split('\n')[1:]
+                for mob in mobs:
+                    mobs_listbox.insert(END, mob)
             else:
                 text_area.config(state=tk.NORMAL)
                 text_area.insert(tk.END, f"{message}\n")
