@@ -23,7 +23,7 @@ def receive_messages(client_socket, text_area, users_listbox, mobs_listbox):
                 mobs_listbox.delete(0, END)
                 mobs = message.split('\n')[1:]
                 for mob in mobs:
-                    users_listbox.insert(END, mob)
+                    mobs_listbox.insert(END, mob)
             else:
                 text_area.config(state=tk.NORMAL)
                 text_area.insert(tk.END, f"{message}\n")

@@ -119,9 +119,9 @@ root.title("Server Messages")
 text_box = ScrolledText(root, state=tk.DISABLED, wrap=tk.WORD)
 text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-# Add button to add a monster
-add_monster_button = tk.Button(root, text="Add Monster", command=lambda: add_monster(monster_names, broadcast_mobs, update_gui))
-add_monster_button.pack(padx=10, pady=10)
+# Function to handle adding a monster user
+def add_monster_user(monster_names, broadcast_mobs, update_gui):
+    add_monster(monster_names, broadcast_mobs, update_gui)
 
 # Start the server in a separate thread
 server_thread = threading.Thread(target=start_server)
