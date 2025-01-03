@@ -3,7 +3,7 @@ import threading
 from datetime import datetime
 
 clients = []
-client_addresses = []
+client_usernames = {}
 
 # Function to handle client connections
 def handle_client(client_socket):
@@ -20,8 +20,8 @@ def handle_client(client_socket):
         except:
             break
     client_socket.close()
+    username = client_usernames.pop(client_socket, None)
     clients.remove(client_socket)
-    client_addresses.remove(client_socket.getpeername())
     broadcast_clients()
 
 # Function to broadcast messages to all clients, including the sender
@@ -35,7 +35,7 @@ def broadcast_message(message, sender_socket):
 
 # Function to broadcast the list of connected clients
 def broadcast_clients():
-    clients_list = "Connected clients: " + ", ".join([str(addr) for addr in client_addresses])
+    clients_list = "Connected clients: " + ", ".join(client_usernames.values())
     for client in clients:
         try:
             client.send(clients_list.encode('utf-8'))
@@ -53,8 +53,12 @@ print("Server listening on port 9999...")
 while True:
     client_socket, addr = server_socket.accept()
     clients.append(client_socket)
-    client_addresses.append(addr)
     print(f"Accepted connection from {addr}")
+
+    # Receive the username from the client
+    username = client_socket.recv(1024).decode('utf-8')
+    client_usernames[client_socket] = username
     broadcast_clients()
+
     client_handler = threading.Thread(target=handle_client, args=(client_socket,))
     client_handler.start()
