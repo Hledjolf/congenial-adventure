@@ -14,10 +14,21 @@ def receive_messages(client_socket, text_area, users_listbox, mobs_listbox):
     while running:
         try:
             message = client_socket.recv(1024).decode('utf-8')
-            text_area.config(state=tk.NORMAL)
-            text_area.insert(tk.END, f"{message}\n")
-            text_area.config(state=tk.DISABLED)
-            text_area.see(tk.END)
+            if message.startswith("Connected clients:"):
+                users_listbox.delete(0, END)
+                clients = message.split('\n')[1:]
+                for client in clients:
+                    users_listbox.insert(END, client)
+            if message.startswith("Connected mobs:"):
+                mobs_listbox.delete(0, END)
+                mobs = message.split('\n')[1:]
+                for mob in mobs:
+                    users_listbox.insert(END, mob)
+            else:
+                text_area.config(state=tk.NORMAL)
+                text_area.insert(tk.END, f"{message}\n")
+                text_area.config(state=tk.DISABLED)
+                text_area.see(tk.END)
         except:
             break
     client_socket.close()

@@ -4,7 +4,7 @@ from datetime import datetime
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
 from User import User, create_client_data_file  # Import the User class and function
-from Monster import add_monster_user  # Import the add_monster_user function
+from Monster import add_monster  # Import the add_monster function
 
 clients = []
 client_usernames = {}
