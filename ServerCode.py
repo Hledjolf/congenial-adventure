@@ -26,7 +26,6 @@ def handle_client(client_socket):
     client_socket.close()
     username = client_usernames.pop(client_socket, None)
     clients.remove(client_socket)
-    broadcast_clients()
 
 # Function to broadcast messages to all clients, including the sender
 def broadcast_message(message, sender_socket):
@@ -52,11 +51,11 @@ def broadcast_clients():
 # Function to broadcast the list of mobs
 def broadcast_mobs():
     mobs_list = ["Connected mobs:"]
-    mobs_list.extend([user.username for user in client_usernames.values()])
-    clients_list_message = "\n".join(clients_list)
+    mobs_list.extend([user.username for user in monster_names.values()])
+    mobs_list_message = "\n".join(mobs_list)
     for client in clients:
         try:
-            client.send(clients_list_message.encode('utf-8'))
+            client.send(mobs_list_message.encode('utf-8'))
         except:
             client.close()
             clients.remove(client)
@@ -120,8 +119,8 @@ root.title("Server Messages")
 text_box = ScrolledText(root, state=tk.DISABLED, wrap=tk.WORD)
 text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-# Add button to add a monster user
-add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster(monster_names, broadcast_mobs, update_gui))
+# Add button to add a monster
+add_monster_button = tk.Button(root, text="Add Monster", command=lambda: add_monster(monster_names, broadcast_mobs, update_gui))
 add_monster_button.pack(padx=10, pady=10)
 
 # Start the server in a separate thread
