@@ -7,6 +7,8 @@
             "max_hp": 30,
             "mp": 10,
             "max_mp": 10,
+			"base_armor": 3,
+			"base_dodge": 10,
             "stats": {
                 "strength": 8,
                 "dexterity": 12,
@@ -24,6 +26,8 @@
             "max_hp": 70,
             "mp": 20,
             "max_mp": 20,
+			"base_armor": 8,
+			"base_dodge": 8,
             "stats": {
                 "strength": 14,
                 "dexterity": 10,
@@ -41,6 +45,8 @@
             "max_hp": 300,
             "mp": 100,
             "max_mp": 100,
+			"base_armor": 30,
+			"base_dodge": 1,
             "stats": {
                 "strength": 24,
                 "dexterity": 18,
