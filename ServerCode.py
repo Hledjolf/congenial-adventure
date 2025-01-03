@@ -56,13 +56,17 @@ while True:
     print(f"Accepted connection from {addr}")
 
     # Receive the username from the client
-    username = client_socket.recv(1024).decode('utf-8').split(':')[0]  # Remove anything after ':'
+    username_data = client_socket.recv(1024).decode('utf-8')
+    username, message = username_data.split(':', 1)  # Split into username and message parts
     client_usernames[client_socket] = username
     broadcast_clients()
 
     # Send a welcome message
     welcome_message = f"Welcome {username}!"
     client_socket.send(welcome_message.encode('utf-8'))
+    
+    # Send the message after the username
+    client_socket.send(message.encode('utf-8'))
 
     client_handler = threading.Thread(target=handle_client, args=(client_socket,))
     client_handler.start()
