@@ -1,0 +1,55 @@
+{
+    "monsters": [
+        {
+            "name": "Goblin",
+            "level": 1,
+            "hit_points": 30,
+            "max_hp": 30,
+            "mp": 10,
+            "max_mp": 10,
+            "stats": {
+                "strength": 8,
+                "dexterity": 12,
+                "wisdom": 6,
+                "intelligence": 6,
+                "constitution": 10,
+                "charisma": 5
+            },
+            "inventory": []
+        },
+        {
+            "name": "Orc",
+            "level": 3,
+            "hit_points": 70,
+            "max_hp": 70,
+            "mp": 20,
+            "max_mp": 20,
+            "stats": {
+                "strength": 14,
+                "dexterity": 10,
+                "wisdom": 8,
+                "intelligence": 8,
+                "constitution": 14,
+                "charisma": 7
+            },
+            "inventory": []
+        },
+        {
+            "name": "Dragon",
+            "level": 10,
+            "hit_points": 300,
+            "max_hp": 300,
+            "mp": 100,
+            "max_mp": 100,
+            "stats": {
+                "strength": 24,
+                "dexterity": 18,
+                "wisdom": 20,
+                "intelligence": 20,
+                "constitution": 22,
+                "charisma": 18
+            },
+            "inventory": []
+        }
+    ]
+}
