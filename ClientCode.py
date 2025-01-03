@@ -9,16 +9,20 @@ running = True
 targeted_monster = None
 
 # Function to handle receiving messages from the server
-def receive_messages(client_socket, text_area, clients_listbox):
+def receive_messages(client_socket, text_area, users_listbox, mobs_listbox):
     global running
     while running:
         try:
             message = client_socket.recv(1024).decode('utf-8')
             if message.startswith("Connected clients:"):
-                clients_listbox.delete(0, END)
+                users_listbox.delete(0, END)
+                mobs_listbox.delete(0, END)
                 clients = message.split('\n')[1:]
                 for client in clients:
-                    clients_listbox.insert(END, client)
+                    if "is_user=1" in client:
+                        users_listbox.insert(END, client)
+                    elif "is_user=0" in client:
+                        mobs_listbox.insert(END, client)
             else:
                 text_area.config(state=tk.NORMAL)
                 text_area.insert(tk.END, f"{message}\n")
@@ -35,11 +39,11 @@ def send_message(client_socket, message_entry, message):
         message_entry.delete(0, tk.END)
 
 # Function to start the client and connect to the server
-def start_client(host, port, text_area, message_entry, clients_listbox, username):
+def start_client(host, port, text_area, message_entry, users_listbox, mobs_listbox, username):
     try:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((host, port))
-        threading.Thread(target=receive_messages, args=(client_socket, text_area, clients_listbox)).start()
+        threading.Thread(target=receive_messages, args=(client_socket, text_area, users_listbox, mobs_listbox)).start()
         return client_socket
     except Exception as e:
         messagebox.showerror("Connection Error", str(e))
@@ -56,12 +60,12 @@ def update_targeted_monster_display(targeted_monster_label):
     global targeted_monster
     targeted_monster_label.config(text=f"Targeted Monster: {targeted_monster if targeted_monster else 'None'}")
 
-# Function to handle selecting a monster from the connected clients display
-def select_monster(event, clients_listbox, targeted_monster_label):
+# Function to handle selecting a monster from the mobs listbox
+def select_monster(event, mobs_listbox, targeted_monster_label):
     global targeted_monster
     try:
-        selected_text = clients_listbox.get(clients_listbox.curselection())
-        if selected_text.startswith("monster_"):
+        selected_text = mobs_listbox.get(mobs_listbox.curselection())
+        if "monster_" in selected_text:
             targeted_monster = selected_text.split(":")[1].strip()
             update_targeted_monster_display(targeted_monster_label)
     except tk.TclError:
@@ -78,11 +82,17 @@ def create_gui(username):
     text_area = tk.Text(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=15)
     text_area.grid(row=0, column=0, columnspan=10, padx=5, pady=5)
 
-    clients_listbox = Listbox(frame, width=20, height=15)
-    clients_listbox.grid(row=0, column=10, padx=5, pady=5, sticky='n')
-    scrollbar = Scrollbar(frame, orient="vertical", command=clients_listbox.yview)
-    scrollbar.grid(row=0, column=11, sticky='ns')
-    clients_listbox.config(yscrollcommand=scrollbar.set)
+    users_listbox = Listbox(frame, width=20, height=15)
+    users_listbox.grid(row=0, column=10, padx=5, pady=5, sticky='n')
+    users_scrollbar = Scrollbar(frame, orient="vertical", command=users_listbox.yview)
+    users_scrollbar.grid(row=0, column=11, sticky='ns')
+    users_listbox.config(yscrollcommand=users_scrollbar.set)
+
+    mobs_listbox = Listbox(frame, width=20, height=15)
+    mobs_listbox.grid(row=0, column=12, padx=5, pady=5, sticky='n')
+    mobs_scrollbar = Scrollbar(frame, orient="vertical", command=mobs_listbox.yview)
+    mobs_scrollbar.grid(row=0, column=13, sticky='ns')
+    mobs_listbox.config(yscrollcommand=mobs_scrollbar.set)
 
     targeted_monster_label = tk.Label(frame, text="Targeted Monster: None")
     targeted_monster_label.grid(row=1, column=0, columnspan=10, padx=5, pady=5)
@@ -101,14 +111,14 @@ def create_gui(username):
         use_skill_button = tk.Button(frame, text=f"Use Skill {i+1}", command=lambda i=i: send_message(client_socket, message_entry, f"use_skill_{i+1}"))
         use_skill_button.grid(row=3 + i // 5, column=i % 5, padx=5, pady=5)
 
-    clients_listbox.bind("<Double-Button-1>", lambda event: select_monster(event, clients_listbox, targeted_monster_label))
+    mobs_listbox.bind("<Double-Button-1>", lambda event: select_monster(event, mobs_listbox, targeted_monster_label))
 
     message_entry.bind("<Return>", lambda event: send_message(client_socket, message_entry, f"{username}: {message_entry.get()}"))
 
     host = '127.0.0.1'  # Server IP address
     port = 9999         # Server port
 
-    client_socket = start_client(host, port, text_area, message_entry, clients_listbox, username)
+    client_socket = start_client(host, port, text_area, message_entry, users_listbox, mobs_listbox, username)
 
     def on_closing():
         global running
