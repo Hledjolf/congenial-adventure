@@ -19,7 +19,7 @@ def receive_messages(client_socket, text_area, users_listbox, mobs_listbox):
                 clients = message.split('\n')[1:]
                 for client in clients:
                     users_listbox.insert(END, client)
-            if message.startswith("Connected mobs:"):
+            elif message.startswith("Connected mobs:"):
                 mobs_listbox.delete(0, END)
                 mobs = message.split('\n')[1:]
                 for mob in mobs:
