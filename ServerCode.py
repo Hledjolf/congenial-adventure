@@ -37,30 +37,17 @@ def broadcast_message(message, sender_socket):
             client.close()
             clients.remove(client)
 
-# Function to broadcast the list of connected users
-def broadcast_users():
-    users_list = "Connected users: " + "\n".join([user.username for user in client_usernames.values() if user.is_user == 1])
-    for client in clients:
-        try:
-            client.send(users_list.encode('utf-8'))
-        except:
-            client.close()
-            clients.remove(client)
-
-# Function to broadcast the list of connected mobs
-def broadcast_mobs():
-    mobs_list = "Connected mobs: " + "\n".join([user.username for user in client_usernames.values() if user.is_user == 0])
-    for client in clients:
-        try:
-            client.send(mobs_list.encode('utf-8'))
-        except:
-            client.close()
-            clients.remove(client)
-
 # Function to broadcast the list of connected clients
 def broadcast_clients():
-    broadcast_users()
-    broadcast_mobs()
+    clients_list = ["Connected clients:"]
+    clients_list.extend([user.username for user in client_usernames.values()])
+    clients_list_message = "\n".join(clients_list)
+    for client in clients:
+        try:
+            client.send(clients_list_message.encode('utf-8'))
+        except:
+            client.close()
+            clients.remove(client)
 
 # Update the GUI with new messages
 def update_gui(message):
@@ -114,7 +101,7 @@ text_box = ScrolledText(root, state=tk.DISABLED, wrap=tk.WORD)
 text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
 # Add button to add a monster user
-add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster_user(client_usernames, broadcast_mobs, update_gui))
+add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster_user(client_usernames, broadcast_clients, update_gui))
 add_monster_button.pack(padx=10, pady=10)
 
 # Start the server in a separate thread
