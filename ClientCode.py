@@ -45,6 +45,11 @@ def start_client(host, port, text_area, message_entry, users_listbox, mobs_listb
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect((host, port))
         threading.Thread(target=receive_messages, args=(client_socket, text_area, users_listbox, mobs_listbox)).start()
+
+        # Automatically send a login message
+        login_message = f"{username} has logged in."
+        send_message(client_socket, message_entry, login_message)
+
         return client_socket
     except Exception as e:
         messagebox.showerror("Connection Error", str(e))
