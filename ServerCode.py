@@ -121,7 +121,7 @@ text_box = ScrolledText(root, state=tk.DISABLED, wrap=tk.WORD)
 text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
 # Add button to add a monster user
-add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster_user(monster_names, broadcast_mobs, update_gui))
+add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster(monster_names, broadcast_mobs, update_gui))
 add_monster_button.pack(padx=10, pady=10)
 
 # Start the server in a separate thread
