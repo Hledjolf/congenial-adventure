@@ -8,6 +8,8 @@ class Monster:
         self.max_hp = 100
         self.mp = 50
         self.max_mp = 50
+        self.base_armor = 5
+        self.base_dodge = 5
         self.stats = {
             "strength": 10,
             "dexterity": 10,
@@ -29,6 +31,8 @@ def add_monster_user(client_usernames, broadcast_clients, update_gui):
     monster.max_hp = monster_template['max_hp']
     monster.mp = monster_template['mp']
     monster.max_mp = monster_template['max_mp']
+    monster.base_armor = monster_template['base_armor']
+    monster.base_dodge = monster_template['base_dodge']
     monster.stats = monster_template['stats']
     monster.inventory = monster_template['inventory']
     

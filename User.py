@@ -10,6 +10,8 @@ class User:
         self.mp = 50
         self.max_mp = 50
         self.role = "Explorer"  # Default role
+        self.base_armor = 5
+        self.base_dodge = 5
         self.stats = {
             "strength": 10,
             "dexterity": 10,
@@ -39,6 +41,8 @@ def create_client_data_file(user):
             "mp": user.mp,
             "max_mp": user.max_mp,
             "role": user.role,
+            "base_armor": user.base_armor,
+            "base_dodge": user.base_dodge,
             "stats": user.stats,
             "inventory": user.inventory
         }

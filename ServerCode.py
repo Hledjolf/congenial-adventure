@@ -39,7 +39,7 @@ def broadcast_message(message, sender_socket):
 
 # Function to broadcast the list of connected clients
 def broadcast_clients():
-    clients_list = "Connected clients: " + ", ".join([user.username for user in client_usernames.values()])
+    clients_list = "Connected clients: " + "\n".join([user.username for user in client_usernames.values()])
     for client in clients:
         try:
             client.send(clients_list.encode('utf-8'))
