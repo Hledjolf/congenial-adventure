@@ -39,7 +39,7 @@ def broadcast_message(message, sender_socket):
 
 # Function to broadcast the list of connected clients
 def broadcast_clients():
-    clients_list = "Connected clients: " + "\n".join([user.username for user in client_usernames.values()])
+    clients_list = "Connected clients: " + "\n".join([f"{user.username}:is_user={user.is_user}" for user in client_usernames.values()])
     for client in clients:
         try:
             client.send(clients_list.encode('utf-8'))
@@ -72,7 +72,8 @@ def start_server():
         # Receive the username from the client
         username_data = client_socket.recv(1024).decode('utf-8')
         username, message = username_data.split(':', 1)  # Split into username and message parts
-        user = User(username)
+        is_user = 1 if "user" in username else 0  # Determine if the client is a user or a mob
+        user = User(username, is_user)
         client_usernames[client_socket] = user
         
         # Create and initialize client data file
