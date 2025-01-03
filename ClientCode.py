@@ -14,21 +14,10 @@ def receive_messages(client_socket, text_area, users_listbox, mobs_listbox):
     while running:
         try:
             message = client_socket.recv(1024).decode('utf-8')
-            if message.startswith("Connected users:"):
-                users_listbox.delete(0, END)
-                users = message.split('\n')[1:]
-                for user in users:
-                    users_listbox.insert(END, user)
-            elif message.startswith("Connected mobs:"):
-                mobs_listbox.delete(0, END)
-                mobs = message.split('\n')[1:]
-                for mob in mobs:
-                    mobs_listbox.insert(END, mob)
-            else:
-                text_area.config(state=tk.NORMAL)
-                text_area.insert(tk.END, f"{message}\n")
-                text_area.config(state=tk.DISABLED)
-                text_area.see(tk.END)
+            text_area.config(state=tk.NORMAL)
+            text_area.insert(tk.END, f"{message}\n")
+            text_area.config(state=tk.DISABLED)
+            text_area.see(tk.END)
         except:
             break
     client_socket.close()
@@ -47,7 +36,7 @@ def start_client(host, port, text_area, message_entry, users_listbox, mobs_listb
         threading.Thread(target=receive_messages, args=(client_socket, text_area, users_listbox, mobs_listbox)).start()
 
         # Automatically send a login message
-        login_message = f"{username} has logged in."
+        login_message = f"{username}: login"
         send_message(client_socket, message_entry, login_message)
 
         return client_socket
