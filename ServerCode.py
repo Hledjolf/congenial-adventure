@@ -26,7 +26,7 @@ def handle_client(client_socket):
     client_socket.close()
     username = client_usernames.pop(client_socket, None)
     clients.remove(client_socket)
-    broadcast_user_list()
+    broadcast_clients()
 
 # Function to broadcast messages to all clients, including the sender
 def broadcast_message(message, sender_socket):
@@ -38,25 +38,30 @@ def broadcast_message(message, sender_socket):
             clients.remove(client)
 
 # Function to broadcast the list of connected users
-def broadcast_user_list():
-    user_list = "Connected users: " + "\n".join([user.username for user in client_usernames.values() if user.is_user == 1])
+def broadcast_users():
+    users_list = "Connected users: " + "\n".join([user.username for user in client_usernames.values() if user.is_user == 1])
     for client in clients:
         try:
-            client.send(user_list.encode('utf-8'))
+            client.send(users_list.encode('utf-8'))
         except:
             client.close()
             clients.remove(client)
 
 # Function to broadcast the list of connected mobs
-def broadcast_mob_list():
-    mob_list = "Connected mobs: " + "\n".join([user.username for user in client_usernames.values() if user.is_user == 0])
+def broadcast_mobs():
+    mobs_list = "Connected mobs: " + "\n".join([user.username for user in client_usernames.values() if user.is_user == 0])
     for client in clients:
         try:
-            client.send(mob_list.encode('utf-8'))
+            client.send(mobs_list.encode('utf-8'))
         except:
             client.close()
             clients.remove(client)
-            
+
+# Function to broadcast the list of connected clients
+def broadcast_clients():
+    broadcast_users()
+    broadcast_mobs()
+
 # Update the GUI with new messages
 def update_gui(message):
     text_box.config(state=tk.NORMAL)
@@ -82,14 +87,13 @@ def start_server():
         # Receive the username from the client
         username_data = client_socket.recv(1024).decode('utf-8')
         username, message = username_data.split(':', 1)  # Split into username and message parts
-        is_user = 1 if "user" in username else 0  # Determine if the client is a user or a mob
-        user = User(username, is_user)
+        user = User(username)
         client_usernames[client_socket] = user
         
         # Create and initialize client data file
         create_client_data_file(user)
 
-        broadcast_user_list()
+        broadcast_clients()
 
         # Send a welcome message
         welcome_message = f"Welcome {username}!"
@@ -110,7 +114,7 @@ text_box = ScrolledText(root, state=tk.DISABLED, wrap=tk.WORD)
 text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
 # Add button to add a monster user
-add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster_user(client_usernames, broadcast_mob_list, update_gui))
+add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster_user(client_usernames, broadcast_mobs, update_gui))
 add_monster_button.pack(padx=10, pady=10)
 
 # Start the server in a separate thread
