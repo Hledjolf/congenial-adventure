@@ -2,9 +2,9 @@ import json
 import os
 
 class User:
-    def __init__(self, username):
+    def __init__(self, username, is_user=1):
         self.username = username
-        self.is_user = 1
+        self.is_user = is_user
         self.level = 1
         self.hit_points = 100
         self.max_hp = 100
