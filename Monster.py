@@ -21,7 +21,7 @@ class Monster:
         }
         self.inventory = []
 
-def add_monster_user(client_usernames, broadcast_clients, update_gui):
+def add_monster(monster_names, broadcast_mobs, update_gui):
     with open('MonsterManual.json', 'r') as file:
         monster_manual = json.load(file)
     
@@ -37,6 +37,6 @@ def add_monster_user(client_usernames, broadcast_clients, update_gui):
     monster.stats = monster_template['stats']
     monster.inventory = monster_template['inventory']
     
-    client_usernames[f"monster_{len(client_usernames)}"] = monster
-    broadcast_clients()
+    monster_names[f"monster_{len(monster_names)}"] = monster
+    broadcast_mobs()
     update_gui(f"Monster user {monster.username} added.")

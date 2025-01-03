@@ -2,9 +2,8 @@ import json
 import os
 
 class User:
-    def __init__(self, username, is_user=1):
+    def __init__(self, username):
         self.username = username
-        self.is_user = is_user
         self.level = 1
         self.hit_points = 100
         self.max_hp = 100
@@ -36,7 +35,6 @@ def create_client_data_file(user):
     if not os.path.exists(filename):
         data = {
             "name": user.username,
-            "is_user": user.is_user,
             "level": user.level,
             "hit_points": user.hit_points,
             "max_hp": user.max_hp,
