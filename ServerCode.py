@@ -1,9 +1,18 @@
 import socket
 import threading
 from datetime import datetime
+import json
+import os
 
 clients = []
 client_usernames = {}
+
+class User:
+    def __init__(self, username):
+        self.username = username
+        self.level = 1
+        self.hit_points = 100
+        self.inventory = []
 
 # Function to handle client connections
 def handle_client(client_socket):
@@ -35,13 +44,29 @@ def broadcast_message(message, sender_socket):
 
 # Function to broadcast the list of connected clients
 def broadcast_clients():
-    clients_list = "Connected clients: " + ", ".join(client_usernames.values())
+    clients_list = "Connected clients: " + ", ".join([user.username for user in client_usernames.values()])
     for client in clients:
         try:
             client.send(clients_list.encode('utf-8'))
         except:
             client.close()
             clients.remove(client)
+
+# Function to create and initialize client data file
+def create_client_data_file(user):
+    filename = f"{user.username}.json"
+    if not os.path.exists(filename):
+        data = {
+            "name": user.username,
+            "level": user.level,
+            "hit_points": user.hit_points,
+            "inventory": user.inventory
+        }
+        with open(filename, "w") as file:
+            json.dump(data, file)
+        print(f"Created new data file for {user.username}")
+    else:
+        print(f"Data file for {user.username} already exists")
 
 # Create a socket for the server
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -58,7 +83,12 @@ while True:
     # Receive the username from the client
     username_data = client_socket.recv(1024).decode('utf-8')
     username, message = username_data.split(':', 1)  # Split into username and message parts
-    client_usernames[client_socket] = username
+    user = User(username)
+    client_usernames[client_socket] = user
+    
+    # Create and initialize client data file
+    create_client_data_file(user)
+
     broadcast_clients()
 
     # Send a welcome message
