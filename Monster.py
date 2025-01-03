@@ -3,6 +3,7 @@ import json
 class Monster:
     def __init__(self, monster_name):
         self.username = monster_name
+        self.is_user = 0
         self.level = 1
         self.hit_points = 100
         self.max_hp = 100
