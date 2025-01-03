@@ -4,6 +4,7 @@ from datetime import datetime
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
 from User import User, create_client_data_file  # Import the User class and function
+from Monster import add_monster_user  # Import the add_monster_user function
 
 clients = []
 client_usernames = {}
@@ -67,7 +68,7 @@ def start_server():
         clients.append(client_socket)
         print(f"Accepted connection from {addr}")
         update_gui(f"Accepted connection from {addr}")
-        
+
         # Receive the username from the client
         username_data = client_socket.recv(1024).decode('utf-8')
         username, message = username_data.split(':', 1)  # Split into username and message parts
@@ -96,6 +97,10 @@ root.title("Server Messages")
 
 text_box = ScrolledText(root, state=tk.DISABLED, wrap=tk.WORD)
 text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
+
+# Add button to add a monster user
+add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster_user(client_usernames, broadcast_clients, update_gui))
+add_monster_button.pack(padx=10, pady=10)
 
 # Start the server in a separate thread
 server_thread = threading.Thread(target=start_server)
