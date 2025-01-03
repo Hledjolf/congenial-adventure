@@ -1,6 +1,8 @@
+import json
+
 class Monster:
-    def __init__(self, username):
-        self.username = "GenericMob"
+    def __init__(self, monster_name):
+        self.username = monster_name
         self.level = 1
         self.hit_points = 100
         self.max_hp = 100
@@ -15,3 +17,21 @@ class Monster:
             "charisma": 10
         }
         self.inventory = []
+
+def add_monster_user(client_usernames, broadcast_clients, update_gui):
+    with open('MonsterManual.json', 'r') as file:
+        monster_manual = json.load(file)
+    
+    monster_template = monster_manual['monsters'][0]  # Select the first monster template, for example
+    monster = Monster(monster_template['name'])
+    monster.level = monster_template['level']
+    monster.hit_points = monster_template['hit_points']
+    monster.max_hp = monster_template['max_hp']
+    monster.mp = monster_template['mp']
+    monster.max_mp = monster_template['max_mp']
+    monster.stats = monster_template['stats']
+    monster.inventory = monster_template['inventory']
+    
+    client_usernames[f"monster_{len(client_usernames)}"] = monster
+    broadcast_clients()
+    update_gui(f"Monster user {monster.username} added.")
