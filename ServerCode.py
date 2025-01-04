@@ -8,6 +8,7 @@ from Monster import add_monster  # Import the add_monster function
 
 clients = []
 client_usernames = {}
+monster_names = {}
 
 # Function to handle client connections
 def handle_client(client_socket):
@@ -93,10 +94,12 @@ def start_server():
             user = User(username)
             client_usernames[client_socket] = user
 
+            # Initialize client lists
+            broadcast_clients()
+            broadcast_mobs()
+
             # Create and initialize client data file
             create_client_data_file(user)
-
-            broadcast_clients()
 
             # Send a welcome message
             welcome_message = f"Welcome {username}!"
@@ -105,6 +108,7 @@ def start_server():
 
             # Send the message after the username
             client_socket.send(message.encode('utf-8'))
+
 
             client_handler = threading.Thread(target=handle_client, args=(client_socket,))
             client_handler.start()
@@ -122,6 +126,10 @@ text_box.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 # Function to handle adding a monster user
 def add_monster_user(monster_names, broadcast_mobs, update_gui):
     add_monster(monster_names, broadcast_mobs, update_gui)
+    
+# Add button to add a monster user
+add_monster_button = tk.Button(root, text="Add Monster User", command=lambda: add_monster_user(monster_names, broadcast_mobs, update_gui))
+add_monster_button.pack(padx=10, pady=10)
 
 # Start the server in a separate thread
 server_thread = threading.Thread(target=start_server)
