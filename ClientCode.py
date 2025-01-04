@@ -141,11 +141,10 @@ def create_gui(username):
         window.quit()
 
     window.protocol("WM_DELETE_WINDOW", on_closing)
-
-   
-    # Initialize InventoryManager and create inventory grid
-    inventory_manager = InventoryManager()
-    create_inventory_grid(frame, inventory_manager, username)
+    
+    # Add button to open inventory window
+    inventory_button = tk.Button(frame, text="Open Inventory", command=lambda: InventoryManager().run())
+    inventory_button.grid(row=2, column=6, padx=5, pady=5)
     
     window.mainloop()
 

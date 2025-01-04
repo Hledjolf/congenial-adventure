@@ -40,11 +40,13 @@ class InventoryManager:
         # Draw backpack slots
         for i in range(10):
             pygame.draw.rect(self.screen, (255, 255, 255), (50 + i * 70, 50, 60, 60), 2)
+            label = self.font.render(f"Slot {i+1}", True, (255, 255, 255))
+            self.screen.blit(label, (50 + i * 70, 30))
             if self.backpack_slots[i]:
                 item_text = self.font.render(self.backpack_slots[i], True, (255, 255, 255))
                 self.screen.blit(item_text, (55 + i * 70, 65))
 
-        # Draw equipped items slots
+        # Draw equipped items slots with labels
         slot_positions = {
             "head": (50, 150), "face": (50, 220), "left_ear": (10, 220), "right_ear": (90, 220),
             "neck": (50, 290), "second_neck": (50, 360), "back": (50, 430), "shoulders": (10, 500),
@@ -54,6 +56,8 @@ class InventoryManager:
         }
         for slot, (x, y) in slot_positions.items():
             pygame.draw.rect(self.screen, (255, 255, 255), (x, y, 60, 60), 2)
+            label = self.font.render(slot.replace('_', ' ').title(), True, (255, 255, 255))
+            self.screen.blit(label, (x, y - 20))
             if self.equipped_items[slot]:
                 item_text = self.font.render(self.equipped_items[slot], True, (255, 255, 255))
                 self.screen.blit(item_text, (x + 5, y + 25))
