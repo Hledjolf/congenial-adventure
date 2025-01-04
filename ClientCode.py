@@ -3,6 +3,8 @@ import threading
 import tkinter as tk
 from tkinter import messagebox, Listbox, Scrollbar, END
 import argparse
+from PIL import Image, ImageTk
+from InventoryManager import InventoryManager
 
 # Global variables
 running = True
@@ -24,6 +26,11 @@ def receive_messages(client_socket, text_area, users_listbox, mobs_listbox):
                 mobs = message.split('\n')[1:]
                 for mob in mobs:
                     mobs_listbox.insert(END, mob)
+            elif "Welcome" in message:  # Handle welcome messages separately
+                text_area.config(state=tk.NORMAL)
+                text_area.insert(tk.END, f"{message}\n")
+                text_area.config(state=tk.DISABLED)
+                text_area.see(tk.END)
             else:
                 text_area.config(state=tk.NORMAL)
                 text_area.insert(tk.END, f"{message}\n")
@@ -71,9 +78,8 @@ def select_monster(event, mobs_listbox, targeted_monster_label):
     global targeted_monster
     try:
         selected_text = mobs_listbox.get(mobs_listbox.curselection())
-        if "monster_" in selected_text:
-            targeted_monster = selected_text.split(":")[1].strip()
-            update_targeted_monster_display(targeted_monster_label)
+        targeted_monster = selected_text
+        update_targeted_monster_display(targeted_monster_label)
     except tk.TclError:
         messagebox.showinfo("Selection Error", "Please select a monster from the list.")
 
@@ -87,6 +93,7 @@ def create_gui(username):
     
     text_area = tk.Text(frame, wrap=tk.WORD, state=tk.DISABLED, width=50, height=15)
     text_area.grid(row=0, column=0, columnspan=10, padx=5, pady=5)
+
 
     users_listbox = Listbox(frame, width=20, height=15)
     users_listbox.grid(row=0, column=10, padx=5, pady=5, sticky='n')
@@ -134,6 +141,11 @@ def create_gui(username):
         window.quit()
 
     window.protocol("WM_DELETE_WINDOW", on_closing)
+    
+    # Initialize InventoryManager and create inventory grid
+    inventory_manager = InventoryManager()
+    create_inventory_grid(frame, inventory_manager, username)
+    
     window.mainloop()
 
 # Run the GUI application
