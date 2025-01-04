@@ -7,7 +7,7 @@ class InventoryManager:
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption('Inventory Manager')
         self.clock = pygame.time.Clock()
-        self.font = pygame.font.Font(None, 36)
+        self.font = pygame.font.SysFont('timesnewroman', 12)
         self.running = True
         self.backpack_slots = [None] * 10
         self.equipped_items = {
@@ -40,10 +40,10 @@ class InventoryManager:
         # Draw backpack slots
         for i in range(10):
             pygame.draw.rect(self.screen, (255, 255, 255), (50 + i * 70, 50, 60, 60), 2)
-            label = self.font.render(f"Slot {i+1}", True, (255, 255, 255))
+            label = self.font.render(f"SLOT {i+1}", True, (255, 255, 255))
             self.screen.blit(label, (50 + i * 70, 30))
             if self.backpack_slots[i]:
-                item_text = self.font.render(self.backpack_slots[i], True, (255, 255, 255))
+                item_text = self.font.render(self.backpack_slots[i].upper(), True, (255, 255, 255))
                 self.screen.blit(item_text, (55 + i * 70, 65))
 
         # Draw equipped items slots with labels
@@ -56,10 +56,10 @@ class InventoryManager:
         }
         for slot, (x, y) in slot_positions.items():
             pygame.draw.rect(self.screen, (255, 255, 255), (x, y, 60, 60), 2)
-            label = self.font.render(slot.replace('_', ' ').title(), True, (255, 255, 255))
+            label = self.font.render(slot.replace('_', ' ').upper(), True, (255, 255, 255))
             self.screen.blit(label, (x, y - 20))
             if self.equipped_items[slot]:
-                item_text = self.font.render(self.equipped_items[slot], True, (255, 255, 255))
+                item_text = self.font.render(self.equipped_items[slot].upper(), True, (255, 255, 255))
                 self.screen.blit(item_text, (x + 5, y + 25))
 
         pygame.display.flip()
