@@ -7,7 +7,7 @@ class InventoryManager:
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption('Inventory Manager')
         self.clock = pygame.time.Clock()
-        self.font = pygame.font.SysFont('timesnewroman', 12)
+        self.font = pygame.font.SysFont('timesnewroman', 14)
         self.running = True
         self.backpack_slots = [None] * 10
         self.equipped_items = {
@@ -48,11 +48,11 @@ class InventoryManager:
 
         # Draw equipped items slots with labels
         slot_positions = {
-            "head": (50, 150), "face": (50, 220), "left_ear": (10, 220), "right_ear": (90, 220),
-            "neck": (50, 290), "second_neck": (50, 360), "back": (50, 430), "shoulders": (10, 500),
-            "chest": (50, 500), "arms": (90, 500), "wrists": (50, 570), "hands": (50, 640),
-            "right_hand": (90, 710), "left_hand": (10, 710), "waist": (50, 780),
-            "legs": (50, 850), "feet": (50, 920)
+            "head": (120, 150), "face": (190, 150), "left_ear": (50, 150), "right_ear": (260, 150),
+            "neck": (120, 240), "second_neck": (190, 240), "back": (50, 240), "shoulders": (260, 240),
+            "chest": (190, 330), "arms": (120, 330), "wrists": (50, 330), "waist": (260, 330),
+            "right_hand": (50, 420), "left_hand": (190, 420), "hands": (120, 420),
+            "legs": (120, 510), "feet": (190, 510)
         }
         for slot, (x, y) in slot_positions.items():
             pygame.draw.rect(self.screen, (255, 255, 255), (x, y, 60, 60), 2)
