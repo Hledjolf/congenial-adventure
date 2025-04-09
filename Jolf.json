@@ -1,0 +1,1 @@
+{"name": "Jolf", "is_user": 1, "level": 1, "hit_points": 100, "max_hp": 100, "mp": 50, "max_mp": 50, "role": "Explorer", "base_armor": 5, "base_dodge": 5, "stats": {"strength": 10, "dexterity": 10, "wisdom": 10, "intelligence": 10, "constitution": 10, "charisma": 10}, "inventory": []}
