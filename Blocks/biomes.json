@@ -1,0 +1,380 @@
+{
+  "biomes": {
+    "Desert": {
+      "temperate": {
+		  "blocks": ["Dry_Sand", "Sand", "Sandstone", "Dry_Dirt", "Loose_Silt", "Clay"],
+		  "temperature_range": [30, 50],
+		  "rainfall_range": [0, 10],
+		  "trees": ["Cactus", "Joshua Tree"],
+		  "shrubs": ["Sagebrush", "Creosote Bush"],
+		  "berry_bushes": ["None"],
+		  "cereals": ["None"],
+		  "vegetables": ["None"],
+		  "fruit_trees": ["Date Palm"]
+      }
+	},
+    "Volcanic": {
+	  "temperate": {
+		"blocks": ["Blaststone", "Obsidian", "Magmarock", "Meteorite Rock", "Dire_Stone", "Ash_Pile"],
+		"temperature_range": [20, 40],
+		"rainfall_range": [20, 50],
+		"trees": ["Pioneer Species"],
+		"shrubs": ["Fireweed", "Mountain Mahogany"],
+		"berry_bushes": ["Salal Berry"],
+		"cereals": ["None"],
+		"vegetables": ["None"],
+		"fruit_trees": ["None"]
+      }
+    },
+    "Alien": {
+      "temperate": {
+		"blocks": ["Alien_Rock", "Tentacle_Cluster", "Brains", "Geode_Crystals", "Geode_Stone", "Jelly_Blob"],
+		"temperature_range": [0, 40],
+		"rainfall_range": [0, 100],
+		"trees": ["Bioluminescent Trees", "Spiral Trees"],
+		"shrubs": ["Alien Ferns", "Glowing Shrubs"],
+		"berry_bushes": ["None"],
+		"cereals": ["None"],
+		"vegetables": ["None"],
+		"fruit_trees": ["None"]
+      }
+	},
+    "Wasteland": {
+      "temperate": {
+		"blocks": ["Waste", "Junk_Pile", "Corrupt_Dirt", "Mud", "Gravel", "Stone_Rubble"],
+		"temperature_range": [0, 30],
+		"rainfall_range": [10, 40],
+		"trees": ["Dead Trees", "Scrub Oak"],
+		"shrubs": ["Tumbleweed", "Thornbush"],
+		"berry_bushes": ["None"],
+		"cereals": ["None"],
+		"vegetables": ["None"],
+		"fruit_trees": ["None"]
+      }
+    },
+    "Forest": {
+      "subarctic": {
+        "blocks": ["Dirt", "Wet_Dirt", "Cobblestone", "Wooden_Log", "Vine", "Striped_Wood"],
+        "temperature_range": [-5, 10],
+        "rainfall_range": [40, 80],
+        "trees": ["Spruce", "Fir"],
+        "shrubs": ["Labrador Tea", "Willow"],
+        "berry_bushes": ["Blueberry", "Cranberry"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "temperate": {
+        "blocks": ["Dirt", "Wet_Dirt", "Cobblestone", "Wooden_Log", "Vine", "Striped_Wood"],
+        "temperature_range": [10, 20],
+        "rainfall_range": [60, 100],
+        "trees": ["Oak", "Maple"],
+        "shrubs": ["Azalea", "Rhododendron"],
+        "berry_bushes": ["Blackberry", "Raspberry"],
+        "cereals": ["Wheat"],
+        "vegetables": ["Carrot", "Potato"],
+        "fruit_trees": ["Apple", "Pear"]
+      },
+      "subtropical": {
+        "blocks": ["Dirt", "Wet_Dirt", "Cobblestone", "Wooden_Log", "Vine", "Striped_Wood"],
+        "temperature_range": [20, 25],
+        "rainfall_range": [80, 120],
+        "trees": ["Magnolia", "Live Oak"],
+        "shrubs": ["Saw Palmetto", "Wax Myrtle"],
+        "berry_bushes": ["Mulberry"],
+        "cereals": ["Rice"],
+        "vegetables": ["Sweet Potato", "Peppers"],
+        "fruit_trees": ["Peach", "Plum"]
+      },
+      "tropical": {
+        "blocks": ["Dirt", "Wet_Dirt", "Cobblestone", "Wooden_Log", "Vine", "Striped_Wood"],
+        "temperature_range": [25, 30],
+        "rainfall_range": [100, 150],
+        "trees": ["Mahogany", "Teak"],
+        "shrubs": ["Bamboo", "Heliconia"],
+        "berry_bushes": ["Acai Berry"],
+        "cereals": ["Maize"],
+        "vegetables": ["Cassava", "Yam"],
+        "fruit_trees": ["Mango", "Papaya"]
+      }
+    },
+    "Plains": {
+      "subarctic": {
+        "blocks": ["Dirt", "Grass_Block", "Clay", "Cobblestone", "Sand", "Gravel"],
+        "temperature_range": [-5, 10],
+        "rainfall_range": [20, 60],
+        "trees": ["Willow", "Poplar"],
+        "shrubs": ["Juniper", "Snowberry"],
+        "berry_bushes": ["Lingonberry"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "temperate": {
+        "blocks": ["Dirt", "Grass_Block", "Clay", "Cobblestone", "Sand", "Gravel"],
+        "temperature_range": [10, 20],
+        "rainfall_range": [40, 80],
+        "trees": ["Elm", "Ash"],
+        "shrubs": ["Sumac", "Dogwood"],
+        "berry_bushes": ["Strawberry"],
+        "cereals": ["Barley"],
+        "vegetables": ["Peas", "Turnip"],
+        "fruit_trees": ["Cherry", "Plum"]
+      },
+      "subtropical": {
+        "blocks": ["Dirt", "Grass_Block", "Clay", "Cobblestone", "Sand", "Gravel"],
+        "temperature_range": [20, 25],
+        "rainfall_range": [60, 100],
+        "trees": ["Pine", "Palm"],
+        "shrubs": ["Oleander", "Hibiscus"],
+        "berry_bushes": ["Goji Berry"],
+        "cereals": ["Millet"],
+        "vegetables": ["Okra", "Sweet Corn"],
+        "fruit_trees": ["Fig", "Pomegranate"]
+      },
+      "tropical": {
+        "blocks": ["Dirt", "Grass_Block", "Clay", "Cobblestone", "Sand", "Gravel"],
+        "temperature_range": [25, 30],
+        "rainfall_range": [80, 120],
+        "trees": ["Coconut Palm", "Banana Tree"],
+        "shrubs": ["Bougainvillea", "Ginger"],
+        "berry_bushes": ["Passionfruit"],
+        "cereals": ["Sorghum"],
+        "vegetables": ["Taro", "Plantain"],
+        "fruit_trees": ["Avocado", "Guava"]
+      }
+    },
+    "Hills": {
+      "subarctic": {
+        "blocks": ["Dirt", "Stone", "Cobblestone", "Gravel", "Clay", "Sand"],
+        "temperature_range": [-5, 10],
+        "rainfall_range": [30, 70],
+        "trees": ["Aspen", "Birch"],
+        "shrubs": ["Mountain Ash", "Alpine Rose"],
+        "berry_bushes": ["Crowberry"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "temperate": {
+        "blocks": ["Dirt", "Stone", "Cobblestone", "Gravel", "Clay", "Sand"],
+        "temperature_range": [10, 20],
+        "rainfall_range": [40, 80],
+        "trees": ["Beech", "Chestnut"],
+        "shrubs": ["Honeysuckle", "Elderberry"],
+        "berry_bushes": ["Raspberry"],
+        "cereals": ["Oats"],
+        "vegetables": ["Brussels Sprouts", "Kale"],
+        "fruit_trees": ["Apple", "Pear"]
+      },
+      "subtropical": {
+        "blocks": ["Dirt", "Stone", "Cobblestone", "Gravel", "Clay", "Sand"],
+        "temperature_range": [20, 25],
+        "rainfall_range": [60, 100],
+        "trees": ["Eucalyptus", "Bamboo"],
+        "shrubs": ["Bottlebrush", "Fan Palm"],
+        "berry_bushes": ["Goji Berry"],
+        "cereals": ["Sorghum"],
+        "vegetables": ["Sweet Corn", "Tomato"],
+        "fruit_trees": ["Fig", "Pomegranate"]
+      },
+      "tropical": {
+        "blocks": ["Dirt", "Stone", "Cobblestone", "Gravel", "Clay", "Sand"],
+        "temperature_range": [25, 30],
+        "rainfall_range": [80, 120],
+        "trees": ["Rubber Tree", "Kapok"],
+        "shrubs": ["Pepper Tree", "Croton"],
+        "berry_bushes": ["Acai Berry"],
+        "cereals": ["Maize"],
+        "vegetables": ["Cassava", "Yam"],
+        "fruit_trees": ["Mango", "Papaya"]
+      }
+    },
+    "Mountains": {
+      "subarctic": {
+        "blocks": ["Stone", "Cobblestone", "Gravel", "Dirt", "Clay", "Obsidian"],
+        "temperature_range": [-5, 5],
+        "rainfall_range": [20, 60],
+        "trees": ["Pine", "Spruce"],
+        "shrubs": ["Rhododendron", "Azalea"],
+        "berry_bushes": ["Blueberry"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "temperate": {
+        "blocks": ["Stone", "Cobblestone", "Gravel", "Dirt", "Clay", "Obsidian"],
+        "temperature_range": [5, 15],
+        "rainfall_range": [30, 70],
+        "trees": ["Hemlock", "Cedar"],
+        "shrubs": ["Blueberry", "Raspberry"],
+        "berry_bushes": ["Gooseberry"],
+        "cereals": ["Barley"],
+        "vegetables": ["Potato", "Turnip"],
+        "fruit_trees": ["Apple", "Pear"]
+      },
+      "subtropical": {
+        "blocks": ["Stone", "Cobblestone", "Gravel", "Dirt", "Clay", "Obsidian"],
+        "temperature_range": [15, 20],
+        "rainfall_range": [40, 80],
+        "trees": ["Palm", "Jacaranda"],
+        "shrubs": ["Bougainvillea", "Plumbago"],
+        "berry_bushes": ["Mulberry"],
+        "cereals": ["Sorghum"],
+        "vegetables": ["Tomato", "Eggplant"],
+        "fruit_trees": ["Fig", "Pomegranate"]
+      },
+      "tropical": {
+        "blocks": ["Stone", "Cobblestone", "Gravel", "Dirt", "Clay", "Obsidian"],
+        "temperature_range": [20, 25],
+        "rainfall_range": [50, 90],
+        "trees": ["Balsa", "Ceiba"],
+        "shrubs": ["Hibiscus", "Ixora"],
+        "berry_bushes": ["Goji Berry"],
+        "cereals": ["Maize"],
+        "vegetables": ["Cassava", "Yam"],
+        "fruit_trees": ["Mango", "Papaya"]
+      }
+    },
+    "Lakes": {
+      "subarctic": {
+        "blocks": ["Dirt", "Clay", "Sand", "Cobblestone", "Wet_Dirt", "Gravel"],
+        "temperature_range": [-5, 10],
+        "rainfall_range": [40, 80],
+        "trees": ["Alder", "Willow"],
+        "shrubs": ["Bog Rosemary", "Cranberry"],
+        "berry_bushes": ["Blueberry"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "temperate": {
+        "blocks": ["Dirt", "Clay", "Sand", "Cobblestone", "Wet_Dirt", "Gravel"],
+        "temperature_range": [10, 20],
+        "rainfall_range": [50, 100],
+        "trees": ["Maple", "Oak"],
+        "shrubs": ["Hydrangea", "Dogwood"],
+        "berry_bushes": ["Raspberry"],
+        "cereals": ["Barley"],
+        "vegetables": ["Carrot", "Peas"],
+        "fruit_trees": ["Apple", "Cherry"]
+      },
+      "subtropical": {
+        "blocks": ["Dirt", "Clay", "Sand", "Cobblestone", "Wet_Dirt", "Gravel"],
+        "temperature_range": [20, 25],
+        "rainfall_range": [60, 120],
+        "trees": ["Cypress", "Live Oak"],
+        "shrubs": ["Buttonbush", "Swamp Azalea"],
+        "berry_bushes": ["Goji Berry"],
+        "cereals": ["Rice"],
+        "vegetables": ["Tomato", "Peppers"],
+        "fruit_trees": ["Fig", "Pomegranate"]
+      },
+      "tropical": {
+        "blocks": ["Dirt", "Clay", "Sand", "Cobblestone", "Wet_Dirt", "Gravel"],
+        "temperature_range": [25, 30],
+        "rainfall_range": [70, 150],
+        "trees": ["Mangrove", "Mahogany"],
+        "shrubs": ["Oleander", "Sea Grape"],
+        "berry_bushes": ["Acai Berry"],
+        "cereals": ["Maize"],
+        "vegetables": ["Cassava", "Yam"],
+        "fruit_trees": ["Mango", "Papaya"]
+      }
+    },
+    "Rivers": {
+      "subarctic": {
+        "blocks": ["Dirt", "Clay", "Sand", "Gravel", "Cobblestone", "Wet_Dirt"],
+        "temperature_range": [-5, 10],
+        "rainfall_range": [40, 80],
+        "trees": ["Birch", "Poplar"],
+        "shrubs": ["Meadowsweet", "Bog Myrtle"],
+        "berry_bushes": ["Blueberry"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "temperate": {
+        "blocks": ["Dirt", "Clay", "Sand", "Gravel", "Cobblestone", "Wet_Dirt"],
+        "temperature_range": [10, 20],
+        "rainfall_range": [50, 100],
+        "trees": ["Sycamore", "Cottonwood"],
+        "shrubs": ["Elder", "Honeysuckle"],
+        "berry_bushes": ["Raspberry"],
+        "cereals": ["Barley"],
+        "vegetables": ["Carrot", "Peas"],
+        "fruit_trees": ["Apple", "Cherry"]
+      },
+      "subtropical": {
+        "blocks": ["Dirt", "Clay", "Sand", "Gravel", "Cobblestone", "Wet_Dirt"],
+        "temperature_range": [20, 25],
+        "rainfall_range": [60, 120],
+        "trees": ["Pecan", "Sweetgum"],
+        "shrubs": ["Wax Myrtle", "Arrowwood"],
+        "berry_bushes": ["Goji Berry"],
+        "cereals": ["Rice"],
+        "vegetables": ["Tomato", "Peppers"],
+        "fruit_trees": ["Fig", "Pomegranate"]
+      },
+      "tropical": {
+        "blocks": ["Dirt", "Clay", "Sand", "Gravel", "Cobblestone", "Wet_Dirt"],
+        "temperature_range": [25, 30],
+        "rainfall_range": [70, 150],
+        "trees": ["Kapok", "Mahogany"],
+        "shrubs": ["Brazilian Pepper", "Firebush"],
+        "berry_bushes": ["Acai Berry"],
+        "cereals": ["Maize"],
+        "vegetables": ["Cassava", "Yam"],
+        "fruit_trees": ["Mango", "Papaya"]
+      }
+    },
+    "Beach": {
+      "subarctic": {
+        "blocks": ["Sand", "Gravel", "Cobblestone", "Clay", "Dirt", "Wet_Dirt"],
+        "temperature_range": [0, 10],
+        "rainfall_range": [50, 90],
+        "trees": ["Sea Buckthorn", "Beach Plum"],
+        "shrubs": ["Saltbush", "Beach Rose"],
+        "berry_bushes": ["None"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "temperate": {
+        "blocks": ["Sand", "Gravel", "Cobblestone", "Clay", "Dirt", "Wet_Dirt"],
+        "temperature_range": [10, 20],
+        "rainfall_range": [60, 100],
+        "trees": ["Tamarisk", "Pine"],
+        "shrubs": ["Bayberry", "Privet"],
+        "berry_bushes": ["None"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      },
+      "tropical": {
+        "blocks": ["Sand", "Gravel", "Cobblestone", "Clay", "Dirt", "Wet_Dirt"],
+        "temperature_range": [25, 30],
+        "rainfall_range": [80, 150],
+        "trees": ["Coconut Palm", "Tropical Almond"],
+        "shrubs": ["Bougainvillea", "Hibiscus"],
+        "berry_bushes": ["None"],
+        "cereals": ["None"],
+        "vegetables": ["None"],
+        "fruit_trees": ["None"]
+      }
+    },
+    "Polar": {
+      "subarctic": {
+		"blocks": ["Snow", "Ice", "Smooth_Ice", "Frozen_Dirt", "Gravel", "Cobblestone"],
+		"temperature_range": [-50, -20],
+		"rainfall_range": [10, 40],
+		"trees": ["None"],
+		"shrubs": ["None"],
+		"berry_bushes": ["None"],
+		"cereals": ["None"],
+		"vegetables": ["None"],
+		"fruit_trees": ["None"]
+      }
+    }
+  }
+}
